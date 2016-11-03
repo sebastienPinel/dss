@@ -22,7 +22,6 @@ package eu.europa.esig.dss;
 
 /**
  * Signature profiles (form+level) handled by the SD-DSS framework.
- *
  */
 public enum SignatureLevel {
 
@@ -46,6 +45,11 @@ public enum SignatureLevel {
 		return valueOf(name.replace("-", "_"));
 	}
 
+	public String getValue() {
+		String name = name();
+		return name.replace('_', '-');
+	}
+
 	@Override
 	public String toString() {
 		return super.toString().replace("_", "-");
@@ -57,43 +61,43 @@ public enum SignatureLevel {
 	public SignatureForm getSignatureForm() {
 
 		switch (this) {
-			case XML_NOT_ETSI:
-			case XAdES_C:
-			case XAdES_X:
-			case XAdES_XL:
-			case XAdES_A:
-			case XAdES_BASELINE_LTA:
-			case XAdES_BASELINE_LT:
-			case XAdES_BASELINE_T:
-			case XAdES_BASELINE_B:
-				return SignatureForm.XAdES;
-			case CMS_NOT_ETSI:
-			case CAdES_BASELINE_LTA:
-			case CAdES_BASELINE_LT:
-			case CAdES_BASELINE_T:
-			case CAdES_BASELINE_B:
-			case CAdES_101733_A:
-			case CAdES_101733_C:
-			case CAdES_101733_X:
-				return SignatureForm.CAdES;
-			case PDF_NOT_ETSI:
-			case PAdES_BASELINE_B:
-			case PAdES_BASELINE_T:
-			case PAdES_BASELINE_LT:
-			case PAdES_BASELINE_LTA:
-				return SignatureForm.PAdES;
-			case ASiC_S_BASELINE_B:
-			case ASiC_S_BASELINE_T:
-			case ASiC_S_BASELINE_LT:
-			case ASiC_S_BASELINE_LTA:
-				return SignatureForm.ASiC_S;
-			case ASiC_E_BASELINE_B:
-			case ASiC_E_BASELINE_T:
-			case ASiC_E_BASELINE_LT:
-			case ASiC_E_BASELINE_LTA:
-				return SignatureForm.ASiC_E;
-			default:
-				return null;
+		case XML_NOT_ETSI:
+		case XAdES_C:
+		case XAdES_X:
+		case XAdES_XL:
+		case XAdES_A:
+		case XAdES_BASELINE_LTA:
+		case XAdES_BASELINE_LT:
+		case XAdES_BASELINE_T:
+		case XAdES_BASELINE_B:
+			return SignatureForm.XAdES;
+		case CMS_NOT_ETSI:
+		case CAdES_BASELINE_LTA:
+		case CAdES_BASELINE_LT:
+		case CAdES_BASELINE_T:
+		case CAdES_BASELINE_B:
+		case CAdES_101733_A:
+		case CAdES_101733_C:
+		case CAdES_101733_X:
+			return SignatureForm.CAdES;
+		case PDF_NOT_ETSI:
+		case PAdES_BASELINE_B:
+		case PAdES_BASELINE_T:
+		case PAdES_BASELINE_LT:
+		case PAdES_BASELINE_LTA:
+			return SignatureForm.PAdES;
+		case ASiC_S_BASELINE_B:
+		case ASiC_S_BASELINE_T:
+		case ASiC_S_BASELINE_LT:
+		case ASiC_S_BASELINE_LTA:
+			return SignatureForm.ASiC_S;
+		case ASiC_E_BASELINE_B:
+		case ASiC_E_BASELINE_T:
+		case ASiC_E_BASELINE_LT:
+		case ASiC_E_BASELINE_LTA:
+			return SignatureForm.ASiC_E;
+		default:
+			return null;
 		}
 	}
 }

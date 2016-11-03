@@ -22,10 +22,13 @@ package eu.europa.esig.dss;
 
 /**
  * Packaging method of the signature
- *
  */
 public enum SignaturePackaging {
 
-	ENVELOPED, ENVELOPING, DETACHED
+	ENVELOPED, ENVELOPING, DETACHED;
+
+	public String getValue() {
+		return toString();
+	}
 
 }

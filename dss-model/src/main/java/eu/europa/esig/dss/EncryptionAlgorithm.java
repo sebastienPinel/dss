@@ -25,7 +25,6 @@ import java.util.Map;
 
 /**
  * Supported signature encryption algorithms.
- *
  */
 public enum EncryptionAlgorithm {
 
@@ -38,7 +37,9 @@ public enum EncryptionAlgorithm {
 	HMAC("HMAC", "", "");
 
 	private String name;
+
 	private String oid;
+
 	private String padding;
 
 	private static class Registry {
@@ -133,6 +134,10 @@ public enum EncryptionAlgorithm {
 	 */
 	public String getPadding() {
 		return padding;
+	}
+
+	public String getValue() {
+		return name;
 	}
 
 }

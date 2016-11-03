@@ -24,31 +24,34 @@ import java.io.Serializable;
 
 /**
  * Parameters for a Signature creation/extension
- *
  */
 @SuppressWarnings("serial")
 public abstract class AbstractSerializableSignatureParameters implements Serializable {
 
 	/**
-	 * This variable indicates if it is possible to sign with an expired certificate.
+	 * This variable indicates if it is possible to sign with an expired
+	 * certificate.
 	 */
 	private boolean signWithExpiredCertificate = false;
 
 	private SignatureLevel signatureLevel;
+
 	private SignaturePackaging signaturePackaging;
 
 	/**
-	 * XAdES: The ds:SignatureMethod indicates the algorithms used to sign ds:SignedInfo.
+	 * xades: The ds:SignatureMethod indicates the algorithms used to sign
+	 * ds:SignedInfo.
 	 */
 	private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.RSA_SHA256;
 
 	/**
-	 * The encryption algorithm shall be automatically extracted from the signing token.
+	 * The encryption algorithm shall be automatically extracted from the
+	 * signing token.
 	 */
 	private EncryptionAlgorithm encryptionAlgorithm = signatureAlgorithm.getEncryptionAlgorithm();
 
 	/**
-	 * XAdES: The digest algorithm used to hash ds:SignedInfo.
+	 * xades: The digest algorithm used to hash ds:SignedInfo.
 	 */
 	private DigestAlgorithm digestAlgorithm = signatureAlgorithm.getDigestAlgorithm();
 
@@ -58,11 +61,14 @@ public abstract class AbstractSerializableSignatureParameters implements Seriali
 	private BLevelParameters bLevelParams = new BLevelParameters();
 
 	private TimestampParameters signatureTimestampParameters;
+
 	private TimestampParameters archiveTimestampParameters;
+
 	private TimestampParameters contentTimestampParameters;
 
 	/**
-	 * Indicates if it is possible to sign with an expired certificate. The default value is false.
+	 * Indicates if it is possible to sign with an expired certificate. The
+	 * default value is false.
 	 *
 	 * @return
 	 */
@@ -71,7 +77,8 @@ public abstract class AbstractSerializableSignatureParameters implements Seriali
 	}
 
 	/**
-	 * Allows to change the default behaviour regarding the use of an expired certificate.
+	 * Allows to change the default behaviour regarding the use of an expired
+	 * certificate.
 	 *
 	 * @param signWithExpiredCertificate
 	 */
@@ -80,7 +87,8 @@ public abstract class AbstractSerializableSignatureParameters implements Seriali
 	}
 
 	/**
-	 * Get signature format: XAdES_BES, XAdES_EPES, XAdES_BASELINE_T ../.. CAdES_BES...
+	 * Get signature format: XAdES_BES, XAdES_EPES, XAdES_BASELINE_T ../..
+	 * CAdES_BES...
 	 *
 	 * @return the value
 	 */
@@ -133,30 +141,30 @@ public abstract class AbstractSerializableSignatureParameters implements Seriali
 	 */
 	public void setDigestAlgorithm(final DigestAlgorithm digestAlgorithm) {
 		this.digestAlgorithm = digestAlgorithm;
-		if ((this.digestAlgorithm != null) && (this.encryptionAlgorithm != null)) {
-			signatureAlgorithm = SignatureAlgorithm.getAlgorithm(this.encryptionAlgorithm, this.digestAlgorithm);
+		if ((this.digestAlgorithm != null) && (encryptionAlgorithm != null)) {
+			signatureAlgorithm = SignatureAlgorithm.getAlgorithm(encryptionAlgorithm, this.digestAlgorithm);
 		}
 	}
 
 	/**
-	 * This setter should be used only when dealing with web services (or when signing in three steps). Usually the
-	 * encryption algorithm is automatically extrapolated from the
-	 * private key.
+	 * This setter should be used only when dealing with web services (or when
+	 * signing in three steps). Usually the encryption algorithm is
+	 * automatically extrapolated from the private key.
 	 *
 	 * @param encryptionAlgorithm
 	 */
 	public void setEncryptionAlgorithm(final EncryptionAlgorithm encryptionAlgorithm) {
 
 		this.encryptionAlgorithm = encryptionAlgorithm;
-		if ((this.digestAlgorithm != null) && (this.encryptionAlgorithm != null)) {
+		if ((digestAlgorithm != null) && (this.encryptionAlgorithm != null)) {
 
-			signatureAlgorithm = SignatureAlgorithm.getAlgorithm(this.encryptionAlgorithm, this.digestAlgorithm);
+			signatureAlgorithm = SignatureAlgorithm.getAlgorithm(this.encryptionAlgorithm, digestAlgorithm);
 		}
 	}
 
 	/**
-	 * @return the encryption algorithm. It's determined by the privateKeyEntry and is null until the privateKeyEntry is
-	 *         set.
+	 * @return the encryption algorithm. It's determined by the privateKeyEntry
+	 *         and is null until the privateKeyEntry is set.
 	 */
 	public EncryptionAlgorithm getEncryptionAlgorithm() {
 		return encryptionAlgorithm;
@@ -218,11 +226,14 @@ public abstract class AbstractSerializableSignatureParameters implements Seriali
 
 	@Override
 	public String toString() {
-		return "SignatureParameters{" + "signWithExpiredCertificate=" + signWithExpiredCertificate + ", signatureLevel=" + signatureLevel
-				+ ", signaturePackaging=" + signaturePackaging + ", signatureAlgorithm=" + signatureAlgorithm + ", encryptionAlgorithm=" + encryptionAlgorithm
+		return "SignatureParameters{" + "signWithExpiredCertificate=" + signWithExpiredCertificate
+				+ ", signatureLevel=" + signatureLevel + ", signaturePackaging=" + signaturePackaging
+				+ ", signatureAlgorithm=" + signatureAlgorithm + ", encryptionAlgorithm=" + encryptionAlgorithm
 				+ ", digestAlgorithm=" + digestAlgorithm + ", bLevelParams=" + bLevelParams
-				+ ", signatureTimestampParameters=" + ((signatureTimestampParameters == null) ? null : signatureTimestampParameters.toString())
-				+ ", archiveTimestampParameters=" + ((archiveTimestampParameters == null) ? null : archiveTimestampParameters.toString()) + '}';
+				+ ", signatureTimestampParameters="
+				+ ((signatureTimestampParameters == null) ? null : signatureTimestampParameters.toString())
+				+ ", archiveTimestampParameters="
+				+ ((archiveTimestampParameters == null) ? null : archiveTimestampParameters.toString()) + '}';
 	}
 
 	@Override
@@ -238,7 +249,8 @@ public abstract class AbstractSerializableSignatureParameters implements Seriali
 		result = (prime * result) + ((signatureAlgorithm == null) ? 0 : signatureAlgorithm.hashCode());
 		result = (prime * result) + ((signatureLevel == null) ? 0 : signatureLevel.hashCode());
 		result = (prime * result) + ((signaturePackaging == null) ? 0 : signaturePackaging.hashCode());
-		result = (prime * result) + ((signatureTimestampParameters == null) ? 0 : signatureTimestampParameters.hashCode());
+		result = (prime * result)
+				+ ((signatureTimestampParameters == null) ? 0 : signatureTimestampParameters.hashCode());
 		return result;
 	}
 

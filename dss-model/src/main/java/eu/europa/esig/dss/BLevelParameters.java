@@ -34,41 +34,47 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class BLevelParameters implements Serializable {
 
 	/**
-	 * This variable indicates if the Baseline profile's trust anchor policy shall be followed:
-	 * ETSI TS 103 171 V2.1.1 (2012-03)
-	 * 6.2.1 Placement of the signing certificate
-	 * ../..
-	 * it is advised to include at least the unavailable intermediary certificates up to but not including the CAs present in the TSLs,
-	 * ../..
-	 * This rule applies as follows: when -B level is constructed the trust anchor is not included, when -LT level is constructed the trust anchor is included.
-	 * NOTE: when trust anchor baseline profile policy is defined only the certificates previous to the trust anchor are included when -B level is constructed.
+	 * This variable indicates if the Baseline profile's trust anchor policy
+	 * shall be followed: ETSI TS 103 171 V2.1.1 (2012-03) 6.2.1 Placement of
+	 * the signing certificate ../.. it is advised to include at least the
+	 * unavailable intermediary certificates up to but not including the CAs
+	 * present in the TSLs, ../.. This rule applies as follows: when -B level is
+	 * constructed the trust anchor is not included, when -LT level is
+	 * constructed the trust anchor is included. NOTE: when trust anchor
+	 * baseline profile policy is defined only the certificates previous to the
+	 * trust anchor are included when -B level is constructed.
 	 */
 	private boolean trustAnchorBPPolicy = true;
 
 	@XmlJavaTypeAdapter(value = DateAdapter.class)
 	private Date signingDate = new Date();
 
-	private List<String> claimedSignerRoles;
+	private List<String> claimedSignerRoles = new ArrayList<String>();
+
 	private List<String> certifiedSignerRoles;
 
 	private Policy signaturePolicy;
 
 	private List<String> commitmentTypeIndication;
+
 	private SignerLocation signerLocation;
 
 	public BLevelParameters() {
 	}
 
 	/**
-	 * @return indicates the trust anchor policy shall be used when creating -B and -LT levels
+	 * @return indicates the trust anchor policy shall be used when creating -B
+	 *         and -LT levels
 	 */
 	public boolean isTrustAnchorBPPolicy() {
 		return trustAnchorBPPolicy;
 	}
 
 	/**
-	 * Allows to set the trust anchor policy to use when creating -B and -LT levels.
-	 * NOTE: when trust anchor baseline profile policy is defined only the certificates previous to the trust anchor are included when building -B level.
+	 * Allows to set the trust anchor policy to use when creating -B and -LT
+	 * levels. NOTE: when trust anchor baseline profile policy is defined only
+	 * the certificates previous to the trust anchor are included when building
+	 * -B level.
 	 *
 	 * @param trustAnchorBPPolicy
 	 *            {@code boolean}
@@ -132,9 +138,6 @@ public class BLevelParameters implements Serializable {
 		if ((claimedSignerRole == null) || (claimedSignerRole.length() == 0)) {
 			throw new NullPointerException("claimedSignerRole");
 		}
-		if (claimedSignerRoles == null) {
-			claimedSignerRoles = new ArrayList<String>();
-		}
 		claimedSignerRoles.add(claimedSignerRole);
 	}
 
@@ -153,11 +156,11 @@ public class BLevelParameters implements Serializable {
 	}
 
 	/**
-	 * ETSI TS 101 733 V2.2.1 (2013-04)
-	 * 5.11.1 commitment-type-indication Attribute
-	 * There may be situations where a signer wants to explicitly indicate to a verifier that by signing the data, it illustrates a
-	 * type of commitment on behalf of the signer. The commitment-type-indication attribute conveys such
-	 * information.
+	 * ETSI TS 101 733 V2.2.1 (2013-04) 5.11.1 commitment-type-indication
+	 * Attribute There may be situations where a signer wants to explicitly
+	 * indicate to a verifier that by signing the data, it illustrates a type of
+	 * commitment on behalf of the signer. The commitment-type-indication
+	 * attribute conveys such information.
 	 */
 	public List<String> getCommitmentTypeIndications() {
 		return commitmentTypeIndication;
@@ -168,23 +171,22 @@ public class BLevelParameters implements Serializable {
 	}
 
 	/**
-	 * ETSI TS 101 733 V2.2.1 (2013-04)
-	 * 5.11.2 signer-location Attribute
-	 * The signer-location attribute specifies a mnemonic for an address associated with the signer at a particular
-	 * geographical (e.g. city) location. The mnemonic is registered in the country in which the signer is located and is used in
-	 * the provision of the Public Telegram Service (according to Recommendation ITU-T F.1 [11]).
-	 * The signer-location attribute shall be a signed attribute.
-	 * The following object identifier identifies the signer-location attribute:
-	 * id-aa-ets-signerLocation OBJECT IDENTIFIER ::= { iso(1) member-body(2)
-	 * us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) id-aa(2) 17}
-	 * Signer-location attribute values have ASN.1 type SignerLocation:
-	 * SignerLocation ::= SEQUENCE { -- at least one of the following shall be present:
-	 * countryName [0] DirectoryString OPTIONAL,
-	 * -- As used to name a Country in X.500
-	 * localityName [1] DirectoryString OPTIONAL,
-	 * -- As used to name a locality in X.500
-	 * postalAdddress [2] PostalAddress OPTIONAL }
-	 * PostalAddress ::= SEQUENCE SIZE(1..6) OF DirectoryString
+	 * ETSI TS 101 733 V2.2.1 (2013-04) 5.11.2 signer-location Attribute The
+	 * signer-location attribute specifies a mnemonic for an address associated
+	 * with the signer at a particular geographical (e.g. city) location. The
+	 * mnemonic is registered in the country in which the signer is located and
+	 * is used in the provision of the Public Telegram Service (according to
+	 * Recommendation ITU-T F.1 [11]). The signer-location attribute shall be a
+	 * signed attribute. The following object identifier identifies the
+	 * signer-location attribute: id-aa-ets-signerLocation OBJECT IDENTIFIER ::=
+	 * { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+	 * smime(16) id-aa(2) 17} Signer-location attribute values have ASN.1 type
+	 * SignerLocation: SignerLocation ::= SEQUENCE { -- at least one of the
+	 * following shall be present: countryName [0] DirectoryString OPTIONAL, --
+	 * As used to name a Country in X.500 localityName [1] DirectoryString
+	 * OPTIONAL, -- As used to name a locality in X.500 postalAdddress [2]
+	 * PostalAddress OPTIONAL } PostalAddress ::= SEQUENCE SIZE(1..6) OF
+	 * DirectoryString
 	 *
 	 * @return the location
 	 */
@@ -276,8 +278,10 @@ public class BLevelParameters implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BLevelParameters [trustAnchorBPPolicy=" + trustAnchorBPPolicy + ", signingDate=" + signingDate + ", claimedSignerRoles=" + claimedSignerRoles + ", certifiedSignerRoles=" + certifiedSignerRoles + ", signaturePolicy="
-				+ signaturePolicy + ", commitmentTypeIndication=" + commitmentTypeIndication + ", signerLocation=" + signerLocation + "]";
+		return "BLevelParameters [trustAnchorBPPolicy=" + trustAnchorBPPolicy + ", signingDate=" + signingDate
+				+ ", claimedSignerRoles=" + claimedSignerRoles + ", certifiedSignerRoles=" + certifiedSignerRoles
+				+ ", signaturePolicy=" + signaturePolicy + ", commitmentTypeIndication=" + commitmentTypeIndication
+				+ ", signerLocation=" + signerLocation + "]";
 	}
 
 }

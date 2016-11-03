@@ -26,7 +26,6 @@ import java.util.Map.Entry;
 
 /**
  * Supported signature algorithms.
- *
  */
 public enum SignatureAlgorithm {
 
@@ -34,7 +33,7 @@ public enum SignatureAlgorithm {
 
 	RSA_SHA224(EncryptionAlgorithm.RSA, DigestAlgorithm.SHA224),
 
-	RSA_SHA256(EncryptionAlgorithm.RSA,	DigestAlgorithm.SHA256),
+	RSA_SHA256(EncryptionAlgorithm.RSA, DigestAlgorithm.SHA256),
 
 	RSA_SHA384(EncryptionAlgorithm.RSA, DigestAlgorithm.SHA384),
 
@@ -52,11 +51,11 @@ public enum SignatureAlgorithm {
 
 	ECDSA_SHA224(EncryptionAlgorithm.ECDSA, DigestAlgorithm.SHA224),
 
-	ECDSA_SHA256(EncryptionAlgorithm.ECDSA,	DigestAlgorithm.SHA256),
+	ECDSA_SHA256(EncryptionAlgorithm.ECDSA, DigestAlgorithm.SHA256),
 
 	ECDSA_SHA384(EncryptionAlgorithm.ECDSA, DigestAlgorithm.SHA384),
 
-	ECDSA_SHA512(EncryptionAlgorithm.ECDSA,	DigestAlgorithm.SHA512),
+	ECDSA_SHA512(EncryptionAlgorithm.ECDSA, DigestAlgorithm.SHA512),
 
 	ECDSA_RIPEMD160(EncryptionAlgorithm.ECDSA, DigestAlgorithm.RIPEMD160),
 
@@ -95,7 +94,8 @@ public enum SignatureAlgorithm {
 		xmlAlgorithms.put("http://www.w3.org/2001/04/xmldsig-more#rsa-sha512", RSA_SHA512);
 		xmlAlgorithms.put("http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160", RSA_RIPEMD160);
 		// Support of not standard AT algorithm name
-		// http://www.rfc-editor.org/rfc/rfc4051.txt --> http://www.rfc-editor.org/errata_search.php?rfc=4051
+		// http://www.rfc-editor.org/rfc/rfc4051.txt -->
+		// http://www.rfc-editor.org/errata_search.php?rfc=4051
 		xmlAlgorithms.put("http://www.w3.org/2001/04/xmldsig-more/rsa-ripemd160", RSA_RIPEMD160);
 
 		// Following algorithms are not in ETSI TS 102 176-1 V2.0.0:
@@ -232,12 +232,14 @@ public enum SignatureAlgorithm {
 	}
 
 	/**
-	 * This method return the {@code SignatureAlgorithm} or the default value if the algorithm is unknown.
+	 * This method return the {@code SignatureAlgorithm} or the default value if
+	 * the algorithm is unknown. TODO: (Bob: 2014 Feb 13) this method can return
+	 * UNKNOWN ALGORITHM...
 	 *
-	 * TODO: (Bob: 2014 Feb 13) this method can return UNKNOWN ALGORITHM...
-	 *
-	 * @param xmlName      XML URI of the given algorithm
-	 * @param defaultValue the default value to be returned if not found
+	 * @param xmlName
+	 *            XML URI of the given algorithm
+	 * @param defaultValue
+	 *            the default value to be returned if not found
 	 * @return {@code SignatureAlgorithm} or default value
 	 */
 	public static SignatureAlgorithm forXML(final String xmlName, final SignatureAlgorithm defaultValue) {
@@ -257,32 +259,36 @@ public enum SignatureAlgorithm {
 	}
 
 	/**
-	 * For given signature algorithm & digest algorithm this function returns the Java form of the signature algorithm Signature Algorithms
-	 *
-	 * The algorithm names in this section can be specified when generating an instance of Signature.
-	 *
-	 * NONEwithRSA - The RSA signature algorithm which does not use a digesting algorithm (e.g. MD5/SHA1) before performing the RSA operation. For more information about the RSA
-	 * Signature algorithms, please see PKCS1.
-	 *
-	 * MD2withRSA MD5withRSA - The MD2/MD5 with RSA Encryption signature algorithm which uses the MD2/MD5 digest algorithm and RSA to create and verify RSA digital signatures as
-	 * defined in PKCS1.
-	 *
-	 * SHA1withRSA SHA256withRSA SHA384withRSA SHA512withRSA - The signature algorithm with SHA-* and the RSA encryption algorithm as defined in the OSI Interoperability Workshop,
-	 * using the padding conventions described in PKCS1.
-	 *
-	 * NONEwithDSA - The Digital Signature Algorithm as defined in FIPS PUB 186-2. The data must be exactly 20 bytes in length. This algorithms is also known under the alias name
-	 * of rawDSA.
-	 *
-	 * SHA1withDSA - The DSA with SHA-1 signature algorithm which uses the SHA-1 digest algorithm and DSA to create and verify DSA digital signatures as defined in FIPS PUB 186.
-	 *
-	 * NONEwithECDSA SHA1withECDSA SHA256withECDSA SHA384withECDSA SHA512withECDSA (ECDSA) - The ECDSA signature algorithms as defined in ANSI X9.62. Note:"ECDSA" is an ambiguous
-	 * name for the "SHA1withECDSA" algorithm and should not be used. The formal name "SHA1withECDSA" should be used instead.
-	 *
-	 * <digest>with<encryption> - Use this to form a name for a signature algorithm with a particular message digest (such as MD2 or MD5) and algorithm (such as RSA or DSA), just
-	 * as was done for the explicitly-defined standard names in this section (MD2withRSA, etc.). For the new signature schemes defined in PKCS1 v 2.0, for which the
-	 * <digest>with<encryption> form is insufficient, <digest>with<encryption>and<mgf> can be used to form a name. Here, <mgf> should be replaced by a mask generation function
-	 * such
-	 * as MGF1. Example: MD5withRSAandMGF1.
+	 * For given signature algorithm & digest algorithm this function returns
+	 * the Java form of the signature algorithm Signature Algorithms The
+	 * algorithm names in this section can be specified when generating an
+	 * instance of Signature. NONEwithRSA - The RSA signature algorithm which
+	 * does not use a digesting algorithm (e.g. MD5/SHA1) before performing the
+	 * RSA operation. For more information about the RSA Signature algorithms,
+	 * please see PKCS1. MD2withRSA MD5withRSA - The MD2/MD5 with RSA Encryption
+	 * signature algorithm which uses the MD2/MD5 digest algorithm and RSA to
+	 * create and verify RSA digital signatures as defined in PKCS1. SHA1withRSA
+	 * SHA256withRSA SHA384withRSA SHA512withRSA - The signature algorithm with
+	 * SHA-* and the RSA encryption algorithm as defined in the OSI
+	 * Interoperability Workshop, using the padding conventions described in
+	 * PKCS1. NONEwithDSA - The Digital Signature Algorithm as defined in FIPS
+	 * PUB 186-2. The data must be exactly 20 bytes in length. This algorithms
+	 * is also known under the alias name of rawDSA. SHA1withDSA - The DSA with
+	 * SHA-1 signature algorithm which uses the SHA-1 digest algorithm and DSA
+	 * to create and verify DSA digital signatures as defined in FIPS PUB 186.
+	 * NONEwithECDSA SHA1withECDSA SHA256withECDSA SHA384withECDSA
+	 * SHA512withECDSA (ECDSA) - The ECDSA signature algorithms as defined in
+	 * ANSI X9.62. Note:"ECDSA" is an ambiguous name for the "SHA1withECDSA"
+	 * algorithm and should not be used. The formal name "SHA1withECDSA" should
+	 * be used instead. <digest>with<encryption> - Use this to form a name for a
+	 * signature algorithm with a particular message digest (such as MD2 or MD5)
+	 * and algorithm (such as RSA or DSA), just as was done for the
+	 * explicitly-defined standard names in this section (MD2withRSA, etc.). For
+	 * the new signature schemes defined in PKCS1 v 2.0, for which the
+	 * <digest>with<encryption> form is insufficient,
+	 * <digest>with<encryption>and<mgf> can be used to form a name. Here, <mgf>
+	 * should be replaced by a mask generation function such as MGF1. Example:
+	 * MD5withRSAandMGF1.
 	 *
 	 * @param javaName
 	 * @return
@@ -296,13 +302,15 @@ public enum SignatureAlgorithm {
 	}
 
 	/**
-	 * For given encryption algorithm & digest algorithm this function returns the signature algorithm.
+	 * For given encryption algorithm & digest algorithm this function returns
+	 * the signature algorithm.
 	 *
 	 * @param encryptionAlgorithm
 	 * @param digestAlgorithm
 	 * @return
 	 */
-	public static SignatureAlgorithm getAlgorithm(final EncryptionAlgorithm encryptionAlgorithm, final DigestAlgorithm digestAlgorithm) {
+	public static SignatureAlgorithm getAlgorithm(final EncryptionAlgorithm encryptionAlgorithm,
+			final DigestAlgorithm digestAlgorithm) {
 		String digestAlgorithm_ = digestAlgorithm.getName();
 		digestAlgorithm_ = digestAlgorithm_.replace("-", "");
 		final String javaName = digestAlgorithm_ + "with" + encryptionAlgorithm.getName();
@@ -316,8 +324,8 @@ public enum SignatureAlgorithm {
 	 * @param digestAlgorithm
 	 */
 	private SignatureAlgorithm(final EncryptionAlgorithm encryptionAlgorithm, final DigestAlgorithm digestAlgorithm) {
-		this.encryptionAlgo = encryptionAlgorithm;
-		this.digestAlgo = digestAlgorithm;
+		encryptionAlgo = encryptionAlgorithm;
+		digestAlgo = digestAlgorithm;
 	}
 
 	/**
@@ -354,6 +362,10 @@ public enum SignatureAlgorithm {
 	 */
 	public String getJCEId() {
 		return JAVA_ALGORITHMS_FOR_KEY.get(this);
+	}
+
+	public String getValue() {
+		return name();
 	}
 
 }
