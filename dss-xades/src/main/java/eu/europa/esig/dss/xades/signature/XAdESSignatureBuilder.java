@@ -574,9 +574,7 @@ public abstract class XAdESSignatureBuilder extends XAdESBuilder implements Sign
 
 		final Date signingDate = params.bLevel().getSigningDate();
 		final XMLGregorianCalendar xmlGregorianCalendar = DSSXMLUtils.createXMLGregorianCalendar(signingDate);
-		// final String xmlSigningTime = xmlGregorianCalendar.toXMLFormat();
-		// FIXME
-		final String xmlSigningTime = "2016-08-25T13:27:21Z";
+		final String xmlSigningTime = xmlGregorianCalendar.toXMLFormat();
 
 		// <SigningTime>2013-11-23T11:22:52Z</SigningTime>
 		final Element signingTimeDom = documentDom.createElementNS(XAdES, XADES_SIGNING_TIME);
